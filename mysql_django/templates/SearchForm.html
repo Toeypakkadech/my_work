@@ -1,0 +1,26 @@
+{%extends 'main.html'%}
+{% block body %}
+<form>
+    {{ form.name.label }}
+    {{ form.name }}
+    <button>ค้นหา</button>
+</form>
+<table>
+  <tr>
+    <th>ชื่อ</th>
+    <th>ตำแหน่งงาน</th>
+    <th>ที่อยู่</th>
+    <th>โทรศัพท์</th>
+    <th>วันเกิด</th>
+  </tr>
+  <tr>
+    {% for r in data %}
+    <td>{{ r.fistname }} {{ r.lastname }}</td>
+    <td>{{ r.position }}</td>
+    <td>{{ r.address }}</td>
+    <td>{{ r.phone }}</td>
+    <td>{{ r.birthday|date:'j F Y' }}</td>
+  </tr>
+    {% endfor %}
+  </table>
+{%endblock %}

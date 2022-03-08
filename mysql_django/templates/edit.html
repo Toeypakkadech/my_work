@@ -1,0 +1,27 @@
+{%extends 'main.html'%}
+{% block body %}
+<table>
+  <tr>
+    <th>ชื่อ</th>
+    <th>ราคา</th>
+  </tr>
+  <tr>
+    {% for r in data %}
+    <tr>
+        <td>
+            <a href="{% url 'emp_updata' id=r.id %}">แก้ไข</a>
+            <a href="javascript:del('{% url 'emp_delete' id=r.id %}')">ลบ</a>
+            <script>
+                function del(url) {
+                    if(confirm('ยืนยันการลบ')){
+                        document.location=url;
+                    }
+                }
+            </script>
+        </td>
+      <td>{{ r.name }}</td>
+      <td>{{ r.price }}</td>
+  </tr>
+    {% endfor %}
+  </table>
+{%endblock %}

@@ -1,0 +1,16 @@
+{%extends 'main.html'%}
+{% block body %}
+    {% if not form.is_valid %}
+    <h4>Product info :</h4>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }} 
+        </table>
+        <br><button>OK</button>
+    </form>
+    {% else %}
+   <h3>แก้ไขข้อมูลเรียบร้อย</h3>
+   <a href="{% url 'emp_edit' %}">ย้อนกลับ</a>
+    {% endif %}
+{%endblock %}

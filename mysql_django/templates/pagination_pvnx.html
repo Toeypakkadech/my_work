@@ -1,0 +1,52 @@
+{%extends 'main.html'%}
+{% block body %}
+    <h4>รายการข้อมูลลำดับที่ {{ page.start_index }} - {{ page.end_index }} </h4>
+    <table>
+        <tr>
+          <th>ชื่อ</th>
+          <th>นามสกุล</th>
+          <th>เพศ</th>
+          <th>ตำแหน่งงาน</th>
+          <th>เงินเดือน</th>
+          <th>ที่อยู่</th>
+          <th>อีเมล</th>
+          <th>โทรศัพท์</th>
+          <th>วันเกิด</th>
+          <th>ศาสนา</th>
+          <th>บันทึกเพิ่มเติม</th>
+        </tr>
+        <tr>
+          {% for r in page %}
+            <td>{{ r.fistname }}</td>
+            <td>{{ r.lastname }}</td>
+            <td>{{ r.gender }}</td>
+            <td>{{ r.position }}</td>
+            <td>{{ r.salary }}</td>
+            <td>{{ r.address }}</td>
+            <td>{{ r.email }}</td>
+            <td>{{ r.phone }}</td>
+            <td>{{ r.birthday|date:'j F Y' }}</td>
+            <td>{{ r.religion }}</td>
+            <td>{{ r.addition_note }}</td>
+        </tr>
+          {% endfor %}
+        </table>
+
+        <div class="mt-4 text-center">
+            <div class="mb-2">หน้า: {{ page.number }}</div>
+            {% if page.number != 1 %}
+                <a href="{% url 'pg_pvnx' pg=1 %}"> หน้าแรก </a>
+            {% endif %}
+            {% if page.has_previous %}
+            <a href="{% url 'pg_pvnx' pg=page.previous_page_number %}"> หน้าที่แล้ว </a>
+            {% endif %}
+
+            {% if page.has_next %}
+            <a href="{% url 'pg_pvnx' pg=page.next_page_number %}"> หน้าถัดไป </a>
+            {% endif %}
+
+            {% if page.number != page.paginator.num_pages %}
+                <a href="{% url 'pg_pvnx' pg=page.paginator.num_pages %}"> หน้าสุดท้าย </a>
+            {% endif %}
+        </div>
+{%endblock %}
